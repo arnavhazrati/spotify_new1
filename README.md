@@ -75,9 +75,33 @@ SELECT * FROM spotify
 WHERE stream > 1000000000;
 ``` 
 2. List all albums along with their respective artists.
-4. Get the total number of comments for tracks where `licensed = TRUE`.
-5. Find all tracks that belong to the album type `single`.
-6. Count the total number of tracks by each artist.
+```sql
+SELECT 
+    DISTINCT album,artist
+FROM spotify
+ORDER BY 1;
+```  
+3. Get the total number of comments for tracks where `licensed = TRUE`.
+```sql
+SELECT
+      SUM(comments) as total_comments
+FROM spotify
+WHERE licensed = 'true';
+``` 
+4. Find all tracks that belong to the album type `single`.
+```sql
+SELECT * FROM spotify
+WHERE album_type ILIKE 'single';
+``` 
+5. Count the total number of tracks by each artist.
+```sql
+SELECT
+    artist,
+	COUNT(*) as total_no_songs
+FROM spotify
+GROUP BY artist
+ORDER BY 2;
+```
 
 ### Medium Level
 1. Calculate the average danceability of tracks in each album.
